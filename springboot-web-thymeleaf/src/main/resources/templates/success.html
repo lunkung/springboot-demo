@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
   	<meta charset="UTF-8">
   	<title>Title</title>
   </head>
 <body>
 	<h1>成功！</h1>
+	<!-- 将div里面的文本内容设置为 后端返回的内容 -->
+	<!-- 如果后端返回内容的，即使用thymeleaf模板引擎的话，会默认替换掉div里面的内容 比如 "这是success"-->
+	<!--th: 任意Html属性，替换原生属性的值  比如id 和 class属性-->
+	<div id="div01" class="myDiv" th:id="${hello}" th:class="${hello}" th:text="${hello}">这是success</div>
+	<hr/>
+	<!-- 会转译 特殊字符，返回什么显示什么-->	
+	<div th:text="${hello}"></div>
+	<!-- 不转译 如果返回值有html标签就会起效果 -->
+	<div th:utext="${hello}"></div>
+	
+	<hr/>
+	<!-- 每次遍历都会生成当前这个标签 -->
+	<h4 th:text="user" th:each="user:${users}"></h4>
+	
+	<hr/>
+	<h4>
+		<span th:each="user:${users}">[[${users}]]</span>
+	</h4>
+	
+	
+	
 </body>
 </html>
